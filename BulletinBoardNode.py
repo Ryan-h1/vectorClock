@@ -26,6 +26,7 @@ class BulletinBoardNode:
         return post
 
     def receive_post(self, post: Post) -> None:
+        self.vector_clock.increment()
         if post.post_id not in self.post_ids:
             self.vector_clock.update(post.pid_to_timestamp_map)
             self.posts.append(post)
